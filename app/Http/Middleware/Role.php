@@ -15,6 +15,7 @@ class Role
      */
     public function handle($request, Closure $next, $role)
     {
+        // check user role
         if (Auth::user()->can($role . '-access')) {
             return $next($request);
         }
