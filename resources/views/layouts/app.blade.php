@@ -33,7 +33,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @if (Auth::check())
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{url('/home')}}">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            @can('admin-access')
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" aria-haspopup="true" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        Manage <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="dropdown-item"><a href="{{route('categories.index')}}"><i class="fa fa-btn fa-tags"></i>Categories</a></li>
+                                    </ul>
+                                </li>
+                            @endcan
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -50,7 +64,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
