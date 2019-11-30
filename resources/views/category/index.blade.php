@@ -12,13 +12,15 @@
                      class="form-control col-md-6" name="q" id="search-category" aria-describedby="helpId" placeholder="Type Category">
                   <small id="helpId" class="form-text text-muted">{{$errors->first('q')}}</small>
                </div>
-               <button type="submit" class="btn btn-primary">Search</button>
+               <button type="submit" class="btn btn-primary float-left">Search</button>
             </form>
+            <a name="" id="" class="btn btn-success float-right mb-3" href="{{route('categories.create')}}" role="button">New Category</a>
             <table class="table table-hover mt-3">
             <thead>
                <tr>
                   <td class="font-weight-bolder">Title</td>
                   <td class="font-weight-bolder">Parent</td>
+                  <td></td>
                </tr>
             </thead>
             <tbody>
@@ -26,6 +28,7 @@
                      <tr>
                         <td>{{$category->title}}</td>
                         <td>{{$category->parent ? $category->parent->title : ''}}</td>
+                        <td><a class="btn btn-warning float-right" href="{{ route('categories.edit', $category->id)}}" role="button">Edit</a></td>
                      </tr>
                @endforeach
             </tbody>

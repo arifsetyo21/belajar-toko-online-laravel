@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Flash;
 use App\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -39,7 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        
+        return view('category.create');
     }
 
     /**
@@ -50,7 +51,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \Validator::make($request->all(), [
+            'title' => 'required|string|max:255|unique:categories',
+            'parent_id' => 'exists:categories,id'
+        ])->validate();
+
+        Category::create($request->all());
+        Flash::success($request->title . ' Category Saved.')->important();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -72,7 +80,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -84,7 +93,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

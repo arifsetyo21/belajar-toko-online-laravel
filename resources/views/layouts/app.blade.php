@@ -86,9 +86,17 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="container mt-3">
+            @include('flash::message')
+        </div>
+
+        <main class="py-2">
             @yield('content')
         </main>
     </div>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
+            
 </body>
 </html>
