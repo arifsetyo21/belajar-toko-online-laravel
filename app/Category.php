@@ -2,6 +2,8 @@
 
 namespace App;
 
+
+use Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -22,4 +24,12 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Product');
     }
+    
+    // protected $dispatchesEvents = [
+    //     'deleting' => CategoryDeleting::class,
+    // ];
+    // public function deleting(Category $category) {
+    //     // remove relation with product
+    //     $cat->products()->detach();
+    // };
 }

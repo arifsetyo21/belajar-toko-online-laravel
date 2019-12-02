@@ -9,10 +9,10 @@
                <div class="form-group">
                   <label for="search-category">Category</label>
                   <input type="text"
-                     class="form-control col-md-6" name="q" id="search-category" aria-describedby="helpId" placeholder="Type Category">
+                     class="form-control col-md-6 mr-0" name="q" id="search-category" aria-describedby="helpId" placeholder="Type Category" >
                   <small id="helpId" class="form-text text-muted">{{$errors->first('q')}}</small>
+                  <button type="submit" class="btn btn-primary float-left">Search</button>
                </div>
-               <button type="submit" class="btn btn-primary float-left">Search</button>
             </form>
             <a name="" id="" class="btn btn-success float-right mb-3" href="{{route('categories.create')}}" role="button">New Category</a>
             <table class="table table-hover mt-3">
@@ -28,7 +28,14 @@
                      <tr>
                         <td>{{$category->title}}</td>
                         <td>{{$category->parent ? $category->parent->title : ''}}</td>
-                        <td><a class="btn btn-warning float-right" href="{{ route('categories.edit', $category->id)}}" role="button">Edit</a></td>
+                        <td>
+                           <a class="float-left mr-3" href="{{ route('categories.edit', $category->id)}}">Edit</a>
+                           <form action="{{route('categories.destroy', ['category' => $category->id])}}" method="post">
+                              @csrf
+                              <input type="hidden" name="_method" value="delete">
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                           </form>
+                        </td>
                      </tr>
                @endforeach
             </tbody>

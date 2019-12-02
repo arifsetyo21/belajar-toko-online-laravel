@@ -93,10 +93,12 @@
         <main class="py-2">
             @yield('content')
         </main>
-    </div>
+    </div>    
     <script>
-        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        $(document).ready(function(){
+            $('div.alert').delay(1000).fadeOut(350);
+        });
     </script>
-            
+    <script src="{{asset('js/jquery.min.js')}}"></script>
 </body>
 </html>

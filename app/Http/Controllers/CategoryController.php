@@ -104,6 +104,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        Flash::success('Category Deleted')->important();
+        return back();
     }
 }
