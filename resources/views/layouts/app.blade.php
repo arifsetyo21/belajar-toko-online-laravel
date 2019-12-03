@@ -12,12 +12,16 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="{{asset('js/tail.select.min.js')}}"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -43,11 +47,16 @@
                                         Manage <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li class="dropdown-item"><a href="{{route('categories.index')}}"><i class="fa fa-btn fa-tags"></i>Categories</a></li>
+                                        <li class="dropdown-item">
+                                            <a href="{{route('categories.index')}}"><i class="fa fa-btn fa-tags"></i>Categories</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a href="{{route('products.index')}}"><i class="fa fa-btn fa-tags"></i>Products</a>
+                                        </li>
                                     </ul>
                                 </li>
                             @endcan
-                        @endif
+                        @endif  
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -94,11 +103,14 @@
             @yield('content')
         </main>
     </div>    
-    <script>
-        $(document).ready(function(){
-            $('div.alert').delay(1000).fadeOut(350);
-        });
-    </script>
+    
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
+    <script>
+        @yield('script')
+    </script>
+
+    <!-- Sweetalert -->
+    @include('sweetalert::alert')
 </body>
 </html>

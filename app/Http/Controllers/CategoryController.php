@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Flash;
 use App\Category;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 class CategoryController extends Controller
 {

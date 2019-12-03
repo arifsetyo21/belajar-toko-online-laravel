@@ -33,7 +33,7 @@
                            <form action="{{route('categories.destroy', ['category' => $category->id])}}" method="post">
                               @csrf
                               <input type="hidden" name="_method" value="delete">
-                              <button type="submit" class="btn btn-danger">Delete</button>
+                              <button type="submit" class="btn btn-danger btnDelete">Delete</button>
                            </form>
                         </td>
                      </tr>
@@ -45,4 +45,14 @@
          </div>
       </div>
    </div>
+@endsection
+
+@section('script')
+$(document).ready(function(){
+
+   $('.btnDelete').click(function(event){
+      if (!confirm('Apakah kamu akan menghapusnya?'))
+         event.preventDefault();
+   });
+});
 @endsection
