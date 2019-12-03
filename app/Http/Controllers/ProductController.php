@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use File;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -128,7 +129,7 @@ class ProductController extends Controller
             $product->categories()->detach();
         }
 
-        \Flash::success($product->name . ' updated');
+        \Flash::success($product->name . ' updated')->important();
         return redirect()->route('products.index');
     }
 
@@ -140,7 +141,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        // menghapus foto apabila ditemukan field foto pada record photo terisi
+        if($product->photo !== null || $product->photo !== '') $this->deletePhoto($product->photo);
+        $product->delete();
+        \Flash::success('Product deleted.')->important();
+        return \redirect()->route('products.index');
     }
 
     /**

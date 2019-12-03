@@ -25,6 +25,6 @@ class CategoryModelServieProvider extends ServiceProvider
     {
         // NOTE Menambahkan Oberserver Category dengan dedicated service providers agar lebih rapi
         // NOTE Sebenarnya dapat langsung ditambahkan pada class AppServiceProviders tapi nanti jadinya tidak rapi
-        \App\Category::observe(\App\Observer\CategoryObserver::class);
+        \App\Category::observe(\App\Observers\CategoryObserver::class);
     }
 }

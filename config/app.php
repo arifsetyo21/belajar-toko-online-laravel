@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         App\Providers\CategoryModelServieProvider::class,
+        App\Providers\ProductModelServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
     ],
