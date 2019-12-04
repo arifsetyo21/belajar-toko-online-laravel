@@ -15,18 +15,27 @@ class CatalogsController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('cat')) {
+        $q = $request->q;
+
+        if ($request->has('cat') && $request->cat != '') {
             $cat = $request->cat;
             $category = Category::findOrFail($cat);
             // Mencari product yang memiliki id product sama dengan related_products_id
-            $products = Product::whereIn('id', $category->related_products_id)->paginate(4);
+            $products = Product::whereIn('id', $category->related_products_id)->where('name', 'LIKE', '%' . $q . '%')->paginate(4);
             // return view('catalog.index', compact('products', 'cat'));
         } else {
-            $products = Product::paginate(4);
-            return view('catalog.index', compact('products'));
+            $products = Product::where('name', 'LIKE', '%' . $q . '%')->paginate(4);
+            return view('catalog.index', compact('products', 'q'));
         }
 
-        return view('catalog.index', ['products' => $products])->with(['cat' => $cat, 'category' => $category]);
+        if ($request->has('sort')) {
+            $sort = $request->get('sort');
+            $order = $request->has('order') ? $request->get('order') : 'asc';
+            $field = in_array($sort, ['price', 'name']) ? $request->get('sort') : 'price';
+            $products = $products->orderBy($field, $order);
+        }
+
+        return view('catalog.index', compact('products', 'q'))->with(['cat' => $cat, 'category' => $category]);
     }
 
     /**

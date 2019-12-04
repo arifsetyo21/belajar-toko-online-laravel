@@ -49,4 +49,18 @@ class Category extends Model
     public function getTotalProductsAttribute(){
         return Product::whereIn('id', $this->related_products_id)->count();
     }
+
+    /**
+     * Cek apakah memiliki child
+     */
+    public function hasChild(){
+        return $this->childs()->count() > 0;
+    }
+    
+    /**
+     * Cek apakah memiliki parent
+     */
+    public function hasParent(){
+        return $this->parent_id > 0;
+    }
 }

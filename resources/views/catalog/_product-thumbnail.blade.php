@@ -11,6 +11,13 @@
             </span>
          @endforeach
       </p>
-      <p class="card-text">Harga : <strong>{{number_format($product->price, 2)}}</strong></p>
+      <p class="card-text">Harga : <strong>Rp. {{number_format($product->price, 2)}}</strong></p>
+      @can('customer-access')
+         @include('catalog._add-product-form', compact('product'))
+      @else
+         @if (auth()->guest())
+            @include('catalog._add-product-form', compact('product'))
+         @endif
+      @endcan
    </div>
 </div>

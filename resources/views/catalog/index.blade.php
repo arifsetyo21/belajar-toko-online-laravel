@@ -4,7 +4,20 @@
     <div class="container">
        <div class="row">
           <div class="col-md-3">
+             @include('catalog._search-panel', [
+                'q' => isset($q) ? $q : null,
+                'cat' => isset($cat) ? $cat : ''
+             ])
+
              @include('catalog._category-panel')
+
+             @if (isset($category) && $category->hasChild())
+                @include('catalog._sub-category-panel', ['current_category' => $category])
+             @endif
+
+             @if (isset($category) && $category->hasParent())
+                 @include('catalog._sub-category-panel', ['current_category' => $category->parent])
+             @endif
           </div>
           <div class="col-md-9">
              <div class="row">
@@ -16,13 +29,31 @@
                      @include('catalog._breadcrumb', ['current_category' => isset($category) ? $category : null])
                   </nav>
                 </div>
-                @foreach ($products as $product)
+               @forelse ($products as $product)
                   <div class="col-md-6">
                      @include('catalog._product-thumbnail', ['product' => $product])
                   </div>
-                @endforeach
+               @empty
+                  <div class="col-md-12 text-center">
+                     @if (isset($q))
+                        <h1>:(</h1>
+                        <p>Produk yang kamu cari tidak ditemukan.</p>
+                        @if (isset($category))
+                           <p><a href="url('/catalogs?q=' . $q)">Cari disemua kategori <i class="fas fa-arrow-right"></i></a></p> 
+                        @endif
+                     @else
+                        <h1>:|</h1>
+                        <p><a href="#">Belum ada produk untuk kategori ini.</a></p>
+                     @endif
+                     <p><a href="{{url('/catalogs')}}">Lihat semua produk <i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
+                  </div>
+               @endforelse
                 <div class="pull-right">
-                   {{ $products->links() }}
+                   @isset($cat)
+                     {{ $products->appends(compact('cat', 'q'))->links() }}
+                   @else
+                     {{$products->links()}}
+                   @endisset
                 </div>
              </div>
           </div>
