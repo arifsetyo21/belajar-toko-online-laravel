@@ -5,13 +5,13 @@
       <div class="row">
          <div class="col-md-12">
             <h3>Category</h3>
-            <form action="{{route('categories.index')}}" method="get">
+            <form action="{{route('categories.index')}}" method="get" class="form-inline">
                <div class="form-group">
-                  <label for="search-category">Category</label>
+                  <label for="search-category">Search</label>
                   <input type="text"
-                     class="form-control col-md-6 mr-0" name="q" id="search-category" aria-describedby="helpId" placeholder="Type Category" >
+                     class="form-control col-md-6 ml-2" name="q" id="search-category" aria-describedby="helpId" placeholder="Type Category" >
                   <small id="helpId" class="form-text text-muted">{{$errors->first('q')}}</small>
-                  <button type="submit" class="btn btn-primary float-left">Search</button>
+                  <button type="submit" class="btn btn-primary ml-2 float-left">Search</button>
                </div>
             </form>
             <a name="" id="" class="btn btn-success float-right mb-3" href="{{route('categories.create')}}" role="button">New Category</a>

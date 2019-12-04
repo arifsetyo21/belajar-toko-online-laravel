@@ -78,6 +78,6 @@ class ProductsSeeder extends Seeder
         $from = database_path() . DIRECTORY_SEPARATOR . 'seeds' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
         $to = public_path() . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
         File::copy($from . 'stub-jacket.jpg', $to . 'stub-jacket.jpg');
-        File::copy($from . 'stub-shoe.jpg', $to . 'stub-jacket.jpg');
+        File::copy($from . 'stub-shoe.jpg', $to . 'stub-shoe.jpg');
     }
 }

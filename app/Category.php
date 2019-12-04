@@ -2,8 +2,8 @@
 
 namespace App;
 
-
 use Notifiable;
+use App\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -24,12 +24,29 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Product');
     }
-    
-    // protected $dispatchesEvents = [
-    //     'deleting' => CategoryDeleting::class,
-    // ];
-    // public function deleting(Category $category) {
-    //     // remove relation with product
-    //     $cat->products()->detach();
-    // };
+
+    /**
+     * Get all product id from active category and its child
+     * */ 
+    public function getRelatedProductsIdAttribute(){
+        $result = $this->products->pluck('id')->toArray();
+        foreach ($this->childs as $child) {
+            $result = \array_merge($result, $child->related_products_id);
+        }
+        return $result;
+    }
+
+    /**
+     * Memunculkan kategori tanpa parent
+     */
+    public function scopeNoParent($query){
+        return $this->where('parent_id', '');
+    }
+
+    /**
+     * Menjumlahkan total kategori pada sebuah kategori
+     */
+    public function getTotalProductsAttribute(){
+        return Product::whereIn('id', $this->related_products_id)->count();
+    }
 }
