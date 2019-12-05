@@ -1,7 +1,6 @@
 {
+    "/jquery.min.js": "/jquery.min.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/sweetalert.min.js": "/js/sweetalert.min.js",
-    "/js/tail.select.min.js": "/js/tail.select.min.js",
     "/css/all.css": "/css/all.css"
 }

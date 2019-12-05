@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::post('cart', 'CartController@addProduct');
+Route::post('cart', 'CartController@addProduct')->name('cart');
 Route::resource('categories', 'CategoryController');
 Route::resource('products', 'ProductController');
 Route::resource('catalogs', 'CatalogsController');

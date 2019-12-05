@@ -1,0 +1,1 @@
+<li class="nav-link"><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a></li>

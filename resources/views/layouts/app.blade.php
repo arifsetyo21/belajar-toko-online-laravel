@@ -12,7 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <script src="{{asset('js/tail.select.min.js')}}"></script>
+    {{-- <script src="{{asset('js/tail.select.min.js')}}"></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,6 +21,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.4.3/dist/sweetalert2.all.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.4.3/dist/sweetalert2.css">
     
 </head>
 <body>
@@ -61,6 +64,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            @include('layouts._customer-feature', ['partial_view' => 'layouts._cart-menu-bar'])
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -102,10 +108,11 @@
         <main class="py-2">
             @yield('content')
         </main>
-    </div>    
-    
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    @if (Session::has('flash_product_name'))
+        @include('catalog._product-added', ['product_name' => Session::get('flash_product_name')])
+    @endif
     <script>
         @yield('script')
     </script>

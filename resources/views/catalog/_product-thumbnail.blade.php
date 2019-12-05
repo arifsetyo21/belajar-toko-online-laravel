@@ -12,12 +12,7 @@
          @endforeach
       </p>
       <p class="card-text">Harga : <strong>Rp. {{number_format($product->price, 2)}}</strong></p>
-      @can('customer-access')
-         @include('catalog._add-product-form', compact('product'))
-      @else
-         @if (auth()->guest())
-            @include('catalog._add-product-form', compact('product'))
-         @endif
-      @endcan
+      {{-- Menampilkan partial view dengan mediator view untuk mempersingkat penulisan kode --}}
+      @include('layouts._customer-feature', ['partial_view' => 'catalog._add-product-form', 'data' => compact($product)])
    </div>
 </div>

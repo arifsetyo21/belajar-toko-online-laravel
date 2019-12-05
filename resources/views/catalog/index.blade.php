@@ -28,6 +28,16 @@
                      </ol> --}}
                      @include('catalog._breadcrumb', ['current_category' => isset($category) ? $category : null])
                   </nav>
+                  <nav>
+                     @isset($error)
+                        @if ($error->has('quantity'))
+                           <div class="alert alert-danger">
+                              <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&times;</button>
+                              {{ $errors->first('quantity') }}
+                           </div>
+                        @endif
+                     @endisset
+                  </nav>
                 </div>
                @forelse ($products as $product)
                   <div class="col-md-6">
