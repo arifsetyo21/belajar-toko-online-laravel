@@ -62,7 +62,10 @@ class ProductObserver
     }
 
     public function deleting(Product $product){
-        // remove relation categories to product
+        /* NOTE Remove relation to categories */
         $product->categories()->detach();
+
+        /* NOTE Remove relation to carts */
+        $product->carts()->detach();
     }
 }

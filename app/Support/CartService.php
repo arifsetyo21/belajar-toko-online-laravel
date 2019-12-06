@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use Auth;
+use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,13 @@ class CartService {
 
    /* NOTE ambil product yang ada cookie dengan key cart */ 
    public function lists(){
-      return unserialize($this->request->cookie('cart'));
+
+      /* NOTE Membedakan cara mengambil product di table cart atau di cookie */
+      if(Auth::check()) {
+         return Cart::where('user_id', Auth::user()->id)->pluck('quantity', 'product_id');
+      } else {
+         return unserialize($this->request->cookie('cart'));
+      }
    }
 
    /* NOTE Hitung total product yang ada dilists */

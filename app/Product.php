@@ -27,4 +27,9 @@ class Product extends Model
             return 'http://placehold.it/850x618';
         }
     }
+
+    public function carts()
+    {
+        return $this->hasMany('App\Cart');
+    }
 }

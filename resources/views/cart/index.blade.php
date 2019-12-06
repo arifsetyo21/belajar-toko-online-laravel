@@ -30,25 +30,31 @@
                         </div>
                      </td>
                      <td data-th="Harga">Rp{{ number_format($order['detail']['price']) }}</td>
-                     <td data-th="Jumlah">{{ $order['quantity'] }}</td>
+                     <td data-th="Jumlah">
+                        <form class="form-inline" action="{{route('cart.updateProduct', ['product_id' => $order['id']])}}" method="post">
+                           <div class="form-group">
+                              @csrf
+                              <input type="hidden" name="_method" value="put">
+                              <input type="number" class="form-control" name="quantity" value="{{$order['quantity']}}">
+                              <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                           </div>
+                        </form>
+                     </td>
                      <td data-th="Subtotal" class="text-center">Rp{{ number_format($order['subtotal'] ) }}</td>
                      <td class="actions" data-th="">
                         <form action="{{route('cart.removeProduct', ['id' => $order['id']])}}" method="post">
-                           <div class="form-group">
-                              <label class="sr-only" for="inputName">Method</label>
-                              <input type="hidden" name="_method" value="delete">
-                              <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm" aria-hidden="true"></i> Delete</button>
-                           </div>
-                           @csrf
-                        </form>
+                        <div class="form-group">
+                           <label class="sr-only" for="inputName">Method</label>
+                           <input type="hidden" name="_method" value="delete">
+                           <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm" aria-hidden="true"></i> Delete</button>
+                        </div>
+                        @csrf
+                     </form>
                      </td>
                   </tr>
                  @endforeach
               </tbody>
               <tfoot>
-                 <tr class="visible-xs">
-                     <td class="text-center"><strong>Total Rp{{ number_format($cart->totalPrice())}}</strong></td>
-                 </tr>
                  <tr>
                     <td><a href="{{url('/catalogs')}}" class="btn btn-warning"><i class="fa fa-angle-left" aria-hidden="true"></i> Belanja Lagi</a></td>
                     <td colspan="2" class="hidden-xs"></td>
