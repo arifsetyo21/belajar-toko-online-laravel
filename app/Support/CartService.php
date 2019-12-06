@@ -24,6 +24,12 @@ class CartService {
 
    /* NOTE Hitung total product yang ada dilists */
    public function totalProduct(){
+      
+      /* NOTE Mengatasi apabila keranjang masih kosong */
+      if ($this->lists() == null) {
+         return 0;
+      }
+
       return count($this->lists());
    }
 
