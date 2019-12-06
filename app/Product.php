@@ -8,6 +8,8 @@ class Product extends Model
 {
     protected $fillable = ['name', 'photo', 'model', 'price'];
 
+    protected $appends = ['photo_path'];
+
     public function categories()
     {
         return $this->belongsToMany('App\Category');

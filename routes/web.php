@@ -18,7 +18,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::post('cart', 'CartController@addProduct')->name('cart');
+Route::group(['prefix' => 'cart'], function () {
+    Route::get('/', 'CartController@index')->name('cart.index');
+    Route::post('/', 'CartController@addProduct')->name('cart.addProduct');
+    Route::delete('/{product_id}', 'CartController@removeProduct')->name('cart.removeProduct');
+});
 Route::resource('categories', 'CategoryController');
 Route::resource('products', 'ProductController');
 Route::resource('catalogs', 'CatalogsController');

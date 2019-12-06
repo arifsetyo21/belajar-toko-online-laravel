@@ -1,4 +1,4 @@
-<form action="{{route('cart')}}" class="form-inline" method="post">
+<form action="{{route('cart.addProduct')}}" class="form-inline" method="post">
    @csrf
    <input type="hidden" name="product_id" value="{{$product->id}}">
    <div class="form-group">

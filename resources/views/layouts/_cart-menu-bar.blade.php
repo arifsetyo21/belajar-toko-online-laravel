@@ -1,1 +1,1 @@
-<li class="nav-link"><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a></li>
+<li class="nav-link"><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart{{$cart->totalProduct() > 0 ? '(' . $cart->totalProduct() . ')' : ''}}</a></li>

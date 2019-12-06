@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use Flash;
 use Session;
 use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
+use App\Support\CartService;
 
 class CartController extends Controller
 {
+
+    protected $cart;
+
+    /* NOTE instansiasi service CartService CartController dipanggil dan memasukkan ke arttibute $cart*/
+    public function __construct(CartService $cart){
+        return $this->cart = $cart;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    /* NOTE Menampilkan cart.index */
     public function index()
     {
-        //
+        return view('cart.index');
     }
 
     /**
@@ -85,7 +96,10 @@ class CartController extends Controller
         //
     }
 
+    /* NOTE Menambahkan product ke cart yang ada dicookie */
     public function addProduct(Request $request){
+
+        /* NOTE Membuat validasi dari inputan */
         \Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
@@ -93,7 +107,6 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->get('product_id'));
         $quantity = $request->get('quantity');
-
         
         /*
         NOTE
@@ -106,14 +119,38 @@ class CartController extends Controller
             $quantity += $cart[$product->id];
         }
 
+        /* NOTE Membuat flash message dengan key 'flash_product_name' */
         Session::flash('flash_product_name', $product->name);
         // mengisi array $cart dengan quantity dan product_id
         $cart[$product->id] = $quantity;
 
-        // melakukan Serialize cart karena cookie pada laravel tidak mendukung array, maka harus diseialize
+        /* NOTE melakukan Serialize cart karena cookie pada laravel tidak mendukung array, maka harus diseialize */
         $cart = serialize($cart);
 
+        /* NOTE Redirect ke routing catalogs dan membuat cookie cart dari variabel cart dengan masa berlaku 5 tahun */
         return redirect('catalogs')->withCookie(cookie()->forever('cart', $cart));
+    }
+
+    /* NOTE menghapus product dari $product_id yang dikirim */
+    public function removeProduct(Request $request, $product_id){
+
+        /* NOTE Mencari product_id dengan method yang dibuat di CartService */
+        $cart = $this->cart->find($product_id);
+
+        /* NOTE Jika kosong maka langsung redirect ke cart tanpa flash message  */
+        if (!$cart) return redirect('cart');
+
+        /* NOTE Membuat flash message dengan teks di bawah dan menggunakan method important() agar menampilkan close button */
+        Flash::success($cart['detail']['name'] . ' Berhasil dihapus dari cart')->important();
+
+        /* NOTE Mengambil cookie 'cart' yang belum dilakukan pengurangan */
+        $cart = unserialize($request->cookie('cart', []));
+
+        /* NOTE Menghapus product pada $cart*/
+        unset($cart[$product_id]);
+
+        /* NOTE Redirect ke halaman cart, dengan membuat cookie yang baru dengan key 'cart'  */
+        return redirect('cart')->withCookie(cookie()->forever('cart', serialize($cart)));
     }
 }
 

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Category;
 use App\Observers\CategoryObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        \View::composer('*', 'App\Http\ViewComposers\CartComposer');
     }
 }
