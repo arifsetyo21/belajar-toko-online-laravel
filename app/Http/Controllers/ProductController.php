@@ -51,11 +51,12 @@ class ProductController extends Controller
             'name' => 'required|unique:products',
             'model' => 'required',
             'photo' => 'mimes:jpeg,png|max:10240', //validasi foto hanya menggunakan extensi jpeg, dan png, ukuran maksimal 10MB
-            'price' => 'required|numeric|min:1000'
+            'price' => 'required|numeric|min:1000',
+            'weight' => 'required|numeric|min:1'
         ])->validate();
 
         // Hanya mengambil variabel name, model dan price
-        $data = $request->only('name', 'model', 'price');
+        $data = $request->only('name', 'model', 'price', 'weight');
 
         if ($request->hasFile('photo')) {
             // menyimpan foto dengan menggunakan method yang dibuat sendiri
@@ -110,10 +111,11 @@ class ProductController extends Controller
             'name' => 'required|unique:products,name,'.$product->id,
             'model' => 'required',
             'photo' => 'mimes:jpeg,png|max:10240',
-            'price' => 'required|numeric|min:1000'
+            'price' => 'required|numeric|min:1000',
+            'weight' => 'required|numeric|min:1'
         ])->validate();
 
-        $data = $request->only('name', 'model', 'price');
+        $data = $request->only('name', 'model', 'price', 'weight');
 
         // update nama file saat ada file 
         if ($request->hasFile('photo')) {

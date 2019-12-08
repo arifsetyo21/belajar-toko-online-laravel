@@ -178,6 +178,7 @@ return [
         App\Providers\CategoryModelServieProvider::class,
         App\Providers\ProductModelServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Flash' => Laracast\Flash\Flash::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'RajaOngkir' => rizalafani\rajaongkirlaravel\RajaOngkirFacade::class,
     ],
 
 ];

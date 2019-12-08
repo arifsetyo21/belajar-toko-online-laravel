@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     /* NOTE Doing something setelah terauthentikasi dengan menambahkan method authenticated() */
     public function authenticated(Request $request){
-        /* NOTE Cek apakah user memiliki hak aksese sebagai customer-access */
+        /* NOTE Cek apakah user memiliki hak aksese sebagai customer-access, Disini kita mengecek apakah user yang login seorang customer dengan menggunakan gate: */
         if($request->user()->can('customer-access')){
             /* NOTE Merge cart dengan menggunakan method yang ada dicart service  */
             $cookie = $this->cart->merge();

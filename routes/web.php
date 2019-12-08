@@ -24,6 +24,17 @@ Route::group(['prefix' => 'cart'], function () {
     Route::delete('/{product_id}', 'CartController@removeProduct')->name('cart.removeProduct');
     Route::put('/{product_id}', 'CartController@updateProduct')->name('cart.updateProduct');
 });
+
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/login', 'CheckoutController@login')->name('chekcout.login');
+    Route::post('/login', 'CheckoutController@postLogin')->name('checkout.postLogin');
+    Route::get('/checkout/address', function() {
+        return "Email customer " . session()->get('checkout.email');
+    })->name('checkout.address');
+    // Route::get('checkout/address', 'CheckoutController@address');
+    // Route::post('checkout/address', 'CheckoutController@postAddress');
+});
+
 Route::resource('categories', 'CategoryController');
 Route::resource('products', 'ProductController');
 Route::resource('catalogs', 'CatalogsController');

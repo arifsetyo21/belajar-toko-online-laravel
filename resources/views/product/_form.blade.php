@@ -18,6 +18,12 @@
     class="form-control" name="price" id="harga" aria-describedby="helpId" placeholder="" @isset($product) value="{{ ($product->price != '') ? $product->price : ''}}" @endisset>
   <small id="helpId" class="form-text text-muted">{{$errors->first('harga')}}</small>
 </div>
+<div class="form-group {{$errors->has('model') ? 'has-error' : ''}}">
+  <label for="weight">Weight</label>
+  <input type="text"
+    class="form-control" name="weight" id="weight" aria-describedby="helpId" placeholder="" @isset($product) value="{{ ($product->price != '') ? $product->price : ''}}" @endisset>
+  <small id="helpId" class="form-text text-muted">{{$errors->first('weight')}}</small>
+</div>
 <div class="form-group {{$errors->has('parent_id') ? 'has-error' : ''}}">
    <div class="form-group">
       <label for="category_lists">Categories</label>

@@ -102,7 +102,13 @@ class CartService {
    }
 
    public function merge(){
-      $cart_cookie = unserialize($this->request->cookie('cart', []));
+
+      $cart_cookie = [];
+
+      if ($this->request->cookie('cart', []) != null) {
+         $cart_cookie = unserialize($this->request->cookie('cart', []));
+      }
+      
       foreach ($cart_cookie as $product_id => $quantity) {
          $cart = Cart::firstOrCreate([
             'user_id' => $this->request->user()->id,
