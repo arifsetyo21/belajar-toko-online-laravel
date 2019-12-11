@@ -41,7 +41,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::check())
-                            <li class="nav-item active">
+                            <li class="nav-item {{(Request::is('home') || Request::is('catalogs')) ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/home')}}">Home <span class="sr-only">(current)</span></a>
                             </li>
                             @can('admin-access')
@@ -59,7 +59,10 @@
                                     </ul>
                                 </li>
                             @endcan
-                        @endif  
+                        @endif
+                        <li class="nav-item {{Request::is('checkout/login')? 'active' : ''}}">
+                            <a class="nav-link" href="{{url('checkout/login')}}">Checkout</a>
+                        </li>  
                     </ul>
 
                     <!-- Right Side Of Navbar -->

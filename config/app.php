@@ -179,6 +179,7 @@ return [
         App\Providers\ProductModelServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
+        App\Providers\HelperServicerProvider::class,
 
     ],
 

@@ -28,11 +28,14 @@ Route::group(['prefix' => 'cart'], function () {
 Route::group(['prefix' => 'checkout'], function () {
     Route::get('/login', 'CheckoutController@login')->name('chekcout.login');
     Route::post('/login', 'CheckoutController@postLogin')->name('checkout.postLogin');
-    Route::get('/checkout/address', function() {
-        return "Email customer " . session()->get('checkout.email');
-    })->name('checkout.address');
-    // Route::get('checkout/address', 'CheckoutController@address');
-    // Route::post('checkout/address', 'CheckoutController@postAddress');
+    // Route::get('/checkout/address', function() {
+    //     return "Email customer " . session()->get('checkout.email');
+    // })->name('checkout.address');
+    Route::get('/address', 'CheckoutController@address')->name('checkout.address');
+    Route::post('/address', 'CheckoutController@postAddress');
+    Route::get('/payment', function() {
+        return var_dump(session('checkout'));
+    });
 });
 
 Route::resource('categories', 'CategoryController');
