@@ -6,6 +6,7 @@ use Auth;
 use Cookie;
 use App\Cart;
 use App\Product;
+use App\Address;
 use Illuminate\Http\Request;
 
 class CartService {
@@ -121,5 +122,33 @@ class CartService {
       }
 
       return Cookie::forget('cart');
+   }
+
+   protected function getDestinationId(){
+
+      if (Auth::check() && session()->has('checkout.address.address_id')) {
+         $address = Address::find(session('checkout.address.address_id'));
+         return $address->regency_id;
+      }
+
+      return session('checkout.address.regency_id');
+   }
+
+   public function shippingFee(){
+      $totalFee = 0;
+         foreach ($this->lists() as $id => $quantity) {
+         $fee = Product::find($id)->getCostTo($this->getDestinationId()) * $quantity;
+         $totalFee += $fee;
+      }
+
+      return (int) $totalFee;
+   }
+
+   public function clearCartCookie(){
+      return Cookie::forget('cart');
+   }
+
+   public function clearCartRecord(){
+      return Cart::where('user_id', Auth::user()->id)->delete();
    }
 }

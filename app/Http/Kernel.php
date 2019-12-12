@@ -61,6 +61,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\Role::class, // Mendaftarkan middleware Role
+        'checkout.have-cart' => \App\Http\Middleware\CheckoutHaveCart::class,
+        'checkout.login-step-done' => \App\Http\Middleware\CheckoutLoginStepDone::class,
+        'checkout.address-step-done' => \App\Http\Middleware\CheckoutAddressStepDone::class,
+        'checkout.payment-step-done' => \App\Http\Middleware\CheckoutPaymentStepDone::class,
     ];
 
     /**

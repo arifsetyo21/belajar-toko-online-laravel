@@ -7,7 +7,7 @@
          <a class="nav-link {{Request::is('checkout/address') ? 'active' : 'disable'}}" href="{{url('checkout/address')}}">Alamat</a>
       </li>
       <li class="nav-item">
-         <a class="nav-link {{Request::is('checkout/payment') ? 'active' : 'disable'}}" href="#">Pembayaran</a>
+         <a class="nav-link {{Request::is('checkout/payment') ? 'active' : 'disable'}}" href="{{url('checkout/payment')}}">Pembayaran</a>
       </li>
    </ul>
 </div>

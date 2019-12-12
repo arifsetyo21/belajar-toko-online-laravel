@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CheckoutAddressRequest extends FormRequest
@@ -30,6 +31,15 @@ class CheckoutAddressRequest extends FormRequest
             'regency_id' => 'required|exists:regencies,id',
             'phone' => 'required|digits_between:9,15'
         ];
+
+        if (Auth::check()) {
+            $address_limit = implode(',', Auth::user()->addresses->pluck('id')->all()) . ',new-address';
+            $rules = ['address_id' => 'required|in:' . $address_limit];
+            if ($this->get('address_id') == 'new-address') {
+                return $rules += $new_address_rules;
+            }
+            return $rules;
+        }
         
         return $new_address_rules;
     }

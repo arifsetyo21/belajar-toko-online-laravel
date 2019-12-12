@@ -33,9 +33,9 @@ Route::group(['prefix' => 'checkout'], function () {
     // })->name('checkout.address');
     Route::get('/address', 'CheckoutController@address')->name('checkout.address');
     Route::post('/address', 'CheckoutController@postAddress');
-    Route::get('/payment', function() {
-        return var_dump(session('checkout'));
-    });
+    Route::get('payment', 'CheckoutController@payment');
+    Route::post('payment', 'CheckoutController@postPayment');
+    Route::get('success', 'CheckoutController@success');
 });
 
 Route::resource('categories', 'CategoryController');

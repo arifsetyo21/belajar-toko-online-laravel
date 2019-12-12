@@ -40,4 +40,9 @@ class User extends Authenticatable
     public function hasPassword(){
         return $this->password !== '';
     }
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
 }

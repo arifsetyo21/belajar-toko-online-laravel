@@ -12,17 +12,17 @@
 <div class="form-group">
   <label for="province_id">Province</label>
   <select class="form-control" name="province_id" id="province_id">
-     @foreach (DB::table('provinces')->pluck('name', 'id') as $key => $province)   
-         <option value="{{$key}}">{{$province}}</option>
-     @endforeach
+    @foreach (DB::table('provinces')->pluck('name', 'id') as $key => $province)   
+        <option value="{{$key}}">{{$province}}</option>
+    @endforeach
   </select>
 </div>
 <div class="form-group">
   <label for="regency_id">Kabupaten/Kota</label>
-  <select class="form-control" name="regency_id[]" id="regency_id">
-     @foreach (DB::table('regencies')->pluck('name', 'id') as $key => $regency)   
-         <option value="{{$key}}">{{$regency}}</option>
-     @endforeach
+  <select class="form-control" name="regency_id" id="regency_id">
+    @foreach (DB::table('regencies')->pluck('name', 'id') as $key => $regency)   
+        <option value="{{$key}}">{{$regency}}</option>
+    @endforeach
   </select>
 </div>
 <div class="form-group">

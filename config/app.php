@@ -180,6 +180,7 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
         App\Providers\HelperServicerProvider::class,
+        App\Providers\OrderDetailModelServiceProvider::class,
 
     ],
 
