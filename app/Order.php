@@ -38,4 +38,30 @@ class Order extends Model
     public function getPaddedIdAttribute(){
         return str_pad($this->id, 6, 0, STR_PAD_LEFT);
     }
+
+    public static function statusList(){
+        return [
+            'waiting-payment' => 'Menuggu pembayaran',
+            'packaging' => 'Order disiapkan',
+            'sent' => 'Paket dikirim',
+            'finished' => 'Selesai'
+        ];
+    }
+
+    public function getHumanStatusAttribute(){
+        return static::statusList()[$this->status];
+    }
+
+    public static function allowdStatus(){
+        return array_keys(static::statusList());
+    }
+
+    public function getTotalFeeAttribute(){
+        $total_fee = 0;
+        foreach ($this->details as $detail) {
+            $total_fee += $detail->quantity * $detail->fee;
+        }
+
+        return $total_fee;
+    }
 }

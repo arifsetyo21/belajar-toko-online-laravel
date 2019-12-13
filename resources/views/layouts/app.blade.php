@@ -54,7 +54,10 @@
                                             <a href="{{route('categories.index')}}"><i class="fa fa-btn fa-tags"></i>Categories</a>
                                         </li>
                                         <li class="dropdown-item">
-                                            <a href="{{route('products.index')}}"><i class="fa fa-btn fa-tags"></i>Products</a>
+                                            <a href="{{route('products.index')}}"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Products</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a href="{{route('orders.index')}}"><i class="fa fa-car" aria-hidden="true"></i>Orders</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -69,6 +72,9 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             @include('layouts._customer-feature', ['partial_view' => 'layouts._cart-menu-bar'])
+                        </li>
+                        <li class="nav-item">
+                            @include('layouts._customer-feature', ['partial_view' => 'layouts._check-order-menu-bar', 'data' => []])
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -88,8 +94,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

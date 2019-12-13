@@ -38,6 +38,9 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::get('success', 'CheckoutController@success');
 });
 
+Route::get('/home/orders', 'HomeController@viewOrders');
+
+Route::resource('orders', 'OrderController', ['only' => ['index', 'edit', 'update']]);
 Route::resource('categories', 'CategoryController');
 Route::resource('products', 'ProductController');
 Route::resource('catalogs', 'CatalogsController');
