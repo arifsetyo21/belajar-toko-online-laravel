@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         ]);
         
         $this->middleware('checkout.address-step-done', [
-            'only' => ['payment', 'postPayment']
+            'only' => ''
         ]);
         
         $this->middleware('checkout.payment-step-done', [
@@ -114,7 +114,6 @@ class CheckoutController extends Controller
 
     protected function authenticatedAddress(CheckoutAddressRequest $request){
         /* return "Akan diisi untuk logic authenticated address"; */
-
         $address_id = $request->get('address_id');
 
         /* Clear Old */
@@ -124,7 +123,6 @@ class CheckoutController extends Controller
         } else {
             session(['checkout.address.address_id' => $address_id]);
         }
-
         return redirect('checkout/payment');
     }
 

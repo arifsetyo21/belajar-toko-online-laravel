@@ -14,76 +14,106 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
-        $sepatu = Category::create(['title' => 'Sepatu']);
+        $makanan = Category::create(['title' => 'Makanan']);
 
-        $sepatu->childs()->saveMany([
-            new Category(['title' => 'Lifestyle']),
-            new Category(['title' => 'Berlari']),
-            new Category(['title' => 'Basket']),
-            new Category(['title' => 'Sepakbola'])
+        $makanan->childs()->saveMany([
+            new Category(['title' => 'Khas Jogja']),
+            new Category(['title' => 'Khas Boyolali']),
+            new Category(['title' => 'Khas Salatiga']),
+            new Category(['title' => 'Khas Surakarta'])
         ]);
 
-        $pakaian = Category::create(['title' => 'Pakaian']);
-        $pakaian->childs()->saveMany([
-            new Category(['title' => 'Jaket']),
-            new Category(['title' => 'Hoodie']),
-            new Category(['title' => 'Rompi'])
+        $minuman = Category::create(['title' => 'Minuman']);
+        $minuman->childs()->saveMany([
+            new Category(['title' => 'Minuman Khas Jogja']),
+            new Category(['title' => 'Minuman Khas Boyolali']),
+            new Category(['title' => 'Minuman Khas Surakarta'])
         ]);
 
-        $running = Category::where('title', 'Berlari')->first();
-        $lifestyle = Category::where('title', 'Lifestyle')->first();
+        $khas_jogja = Category::where('title', 'Khas Jogja')->first();
+        $khas_boyolali = Category::where('title', 'Khas Boyolali')->first();
 
-        $sepatu1 = Product::create([
-            'name' => 'Nike Air Force',
-            'model' => 'Sepatu Pria',
-            'photo' => 'stub-shoe.jpg',
-            'weight' => rand(1,3) * 1000,
-            'price' => 340000]);
-        $sepatu2 = Product::create([
-            'name' => 'Nike Air Max',
-            'model' => 'Sepatu Wanita',
-            'weight' => rand(1,3) * 1000,
-            'photo' => 'stub-shoe.jpg',
-            'price' => 420000]);
-        $sepatu3 = Product::create([
-            'name' => 'Nike Air Zoom',
-            'model' => 'Sepatu Wanita',
-            'weight' => rand(1,3) * 1000,
-            'photo' => 'stub-shoe.jpg',
-            'price' => 360000]);
+        $bakpia_pathok_25 = Product::create([
+            'name' => 'Bakpia Pathok 25',
+            'model' => 'Makanan Khas',
+            'photo' => 'bakpia_pathok_25.jpg',
+            'weight' => 2 * 1000,
+            'price' => 145000]);
+        $bakpia_pathok_81 = Product::create([
+            'name' => 'Bakpia Pathok 81',
+            'model' => 'Makanan Khas',
+            'weight' => 1 * 1000,
+            'photo' => '154253664809666_5f6039f4-07a0-4022-9982-bf336586a157.jpeg',
+            'price' => 30000]);
+        $gudeg_yu_djum_besek = Product::create([
+            'name' => 'Gudeg yu Djum Besek',
+            'model' => 'Makanan Khas',
+            'weight' => 1 * 1000,
+            'photo' => 'Gudeg-Yu-Djum-Paket-Besek.jpg',
+            'price' => 130000]);
+        $gudeg_yu_djum_kendil = Product::create([
+            'name' => 'Gudeg yu Djum Kendil',
+            'model' => 'Makanan Khas',
+            'weight' => 2 * 1000,
+            'photo' => 'Gudeg-Yu-Djum-Paket-Kendil.jpg',
+            'price' => 290000]);
+        $coklat_monggo_punakawan = Product::create([
+            'name' => 'Coklat Monggo Punakawan',
+            'model' => 'Makanan Khas',
+            'weight' => 1 * 1000,
+            'photo' => 'Souvenier-Box-Punokawan_a-min.png',
+            'price' => 90000]);
+        $marning =   Product::create([
+            'name' => 'Marning Jagung Istimewa Rasa Pedas Manis',
+            'model' => 'Makanan Khas',
+            'weight' => 1 * 1000,
+            'photo' => 'kripik-singkong-marning-jagung-madura-65d62fd3ff84896fd0c833ddabec7fdd.jpg',
+            'price' => 12000]);
+        $dodol_susu = Product::create([
+            'name' => 'Dodol Susu Super Serba Susu Lembang',
+            'model' => 'Makanan Khas',
+            'weight' => 1 * 1000,
+            'photo' => 'e751ec7dfbe6d5311b8498f73b9ec454-33dfda68329158811b3f336ad6796f01.jpg',
+            'price' => 15000]);
+        $yangko_jogja = Product::create([
+            'name' => 'Yangko',
+            'model' => 'Makanan Khas',
+            'weight' => 1 * 1000,
+            'photo' => 'Info-Jogja-Seputar-Panganan-Tradisional-Yang-Mendunia-800x480.jpg',
+            'price' => 29000]);
+        
+        $khas_jogja->products()->saveMany([$bakpia_pathok_25, $bakpia_pathok_81, $gudeg_yu_djum_besek, $gudeg_yu_djum_kendil, $coklat_monggo_punakawan, $yangko_jogja]);   
+        $khas_boyolali->products()->saveMany([$marning, $dodol_susu]);
 
-        $running->products()->saveMany([$sepatu1, $sepatu2, $sepatu3]);
-        $lifestyle->products()->saveMany([$sepatu1, $sepatu2]);
+        $minuman_khas_jogja = Category::where('title', 'Minuman Khas Jogja')->first();
 
-        $jacket = Category::where('title', 'Jaket')->first();
-        $vest = Category::where('title', 'Rompi')->first();
+        $kopi_jos = Product::create([
+            'name' => 'Kopi Jos Rempah',
+            'model' => 'Minuman Khas',
+            'photo' => '0_481247f3-50f9-4de2-b242-b5616d78effc_734_672.jpg',
+            'weight' => 1 * 1000,
+            'price' => 120000]);
+        $wedang_uwuh = Product::create([
+            'name' => 'Wedang Uwuh',
+            'model' => 'Minuman Khas',
+            'photo' => '38322698_33218068-b004-4392-9d07-d2d138df9f8a_1080_809.png',
+            'weight' => 1 * 1000,
+            'price' => 3000]);
 
-        $jacket1 = Product::create([
-            'name' => 'Nike Aeroloft Bomber',
-            'model' => 'Jaket Wanita',
-            'photo' => 'stub-jacket.jpg',
-            'weight' => rand(1,3) * 1000,
-            'price' => 720000]);
-        $jacket2 = Product::create([
-            'name' => 'Nike Guild 550',
-            'model' => 'Jaket Pria',
-            'photo' => 'stub-jacket.jpg',
-            'weight' => rand(1,3) * 1000,
-            'price' => 380000]);
-        $jacket3 = Product::create([
-            'name' => 'Nike SB Steele',
-            'model' => 'Jaket Pria',
-            'photo' => 'stub-jacket.jpg',
-            'weight' => rand(1,3) * 1000,
-            'price' => 1200000]);
-
-        $jacket->products()->saveMany([$jacket1, $jacket3]);
-        $vest->products()->saveMany([$jacket2, $jacket3]);
+        $minuman_khas_jogja->products()->saveMany([$kopi_jos, $wedang_uwuh]);
         
         // copy image sample to public directory
         $from = database_path() . DIRECTORY_SEPARATOR . 'seeds' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
         $to = public_path() . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
-        File::copy($from . 'stub-jacket.jpg', $to . 'stub-jacket.jpg');
-        File::copy($from . 'stub-shoe.jpg', $to . 'stub-shoe.jpg');
+        File::copy($from . 'bakpia_pathok_25.jpg', $to . 'bakpia_pathok_25.jpg');
+        File::copy($from . '154253664809666_5f6039f4-07a0-4022-9982-bf336586a157.jpeg', $to . '154253664809666_5f6039f4-07a0-4022-9982-bf336586a157.jpeg');
+        File::copy($from . 'Gudeg-Yu-Djum-Paket-Besek.jpg', $to . 'Gudeg-Yu-Djum-Paket-Besek.jpg');
+        File::copy($from . 'Gudeg-Yu-Djum-Paket-Kendil.jpg', $to . 'Gudeg-Yu-Djum-Paket-Kendil.jpg');
+        File::copy($from . 'Souvenier-Box-Punokawan_a-min.png', $to . 'Souvenier-Box-Punokawan_a-min.png');
+        File::copy($from . 'kripik-singkong-marning-jagung-madura-65d62fd3ff84896fd0c833ddabec7fdd.jpg', $to . 'kripik-singkong-marning-jagung-madura-65d62fd3ff84896fd0c833ddabec7fdd.jpg');
+        File::copy($from . 'e751ec7dfbe6d5311b8498f73b9ec454-33dfda68329158811b3f336ad6796f01.jpg', $to . 'e751ec7dfbe6d5311b8498f73b9ec454-33dfda68329158811b3f336ad6796f01.jpg');
+        File::copy($from . 'Info-Jogja-Seputar-Panganan-Tradisional-Yang-Mendunia-800x480.jpg', $to . 'Info-Jogja-Seputar-Panganan-Tradisional-Yang-Mendunia-800x480.jpg');
+        File::copy($from . '0_481247f3-50f9-4de2-b242-b5616d78effc_734_672.jpg', $to . '0_481247f3-50f9-4de2-b242-b5616d78effc_734_672.jpg');
+        File::copy($from . '38322698_33218068-b004-4392-9d07-d2d138df9f8a_1080_809.png', $to . '38322698_33218068-b004-4392-9d07-d2d138df9f8a_1080_809.png');
     }
 }
