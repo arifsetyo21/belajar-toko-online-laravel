@@ -11415,3 +11415,8 @@ a.text-dark:focus {
   display: inline;
 }
 
+body{
+  background-image: url('/svg/leaf/leaf.svg');
+  background-color: #227dc7 !important;
+  font-family: 'Shadows Into Light', cursive;
+}
