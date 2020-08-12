@@ -29,7 +29,7 @@
         "bootstrap-select": "^1.13.12",
         "selectize": "^0.12.6",
         "selectize-bootstrap4-theme": "^2.0.2",
-        "serialize-javascript": ">=2.1.1",
+        "serialize-javascript": ">=3.1.0",
         "sweetalert": "^2.1.2",
         "sweetalert2": "^9.4.3",
         "tail.select": "^0.5.15"
